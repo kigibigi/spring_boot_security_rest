@@ -8,51 +8,50 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/user")
-public class UserController {
+@RequestMapping("/admin")
+public class AdminController {
 
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public AdminController(UserService userService) {
         this.userService = userService;
     }
 
-    @GetMapping("/person")
-    public String show(@RequestParam(value = "id") Long id,
-                       Model model) {
-        model.addAttribute("user", userService.findById(id));
-        return "/users/show";
+    @GetMapping
+    public String index(Model model) {
+        model.addAttribute("users", userService.findAll());
+        return "/admin/index";
     }
 
     @GetMapping("/new")
     public String newUser(@ModelAttribute User user) {
-        return "/users/new";
+        return "/admin/new";
     }
 
     @PostMapping()
     public String create(@ModelAttribute User user) {
         userService.save(user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
-    @GetMapping("/update/person")
+    @GetMapping("/update")
     public String edit(@RequestParam(name = "id") Long id,
-                         Model model) {
+                       Model model) {
         model.addAttribute("user", userService.findById(id));
-        return "users/edit";
+        return "admin/edit";
     }
 
-    @PatchMapping("/person")
+    @PatchMapping()
     public String update(@ModelAttribute User user,
                          @RequestParam(name = "id") Long id) {
         userService.update(id, user);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 
-    @DeleteMapping("/person")
+    @DeleteMapping()
     public String delete(@RequestParam(name = "id") Long id) {
         userService.delete(id);
-        return "redirect:/users";
+        return "redirect:/admin";
     }
 }
