@@ -1,11 +1,14 @@
 package bm.com.spring_mvc_boot.controllers;
 
+import bm.com.spring_mvc_boot.model.Role;
 import bm.com.spring_mvc_boot.model.User;
 import bm.com.spring_mvc_boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashSet;
 
 @Controller
 @RequestMapping("/admin")

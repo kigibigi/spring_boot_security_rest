@@ -6,18 +6,21 @@
 </head>
 <body>
     <div th:each="user : ${users}">
-        <a th:href="@{/users/person?id={id}(id=${user.getId()})}"
+        <a th:href="@{/user?id={id}(id=${user.getId()})}"
            th:text="${user.getId()} + '. ' + ${user.getFirstName()} + ' ' + ${user.getLastName}"/>
-        <form th:action="@{/admin/update?id={id}(id=${user.getId()})}" th:method="GET">
-            <input type="submit" value="Edit"/>
-        </form>
+
         <form th:method="DELETE" th:action="@{/admin?id={id}(id=${user.getId()})}">
             <input type="submit" value="Delete!">
+        </form>
+
+        <form th:action="@{/admin/update?id={id}(id=${user.getId()})}" th:method="GET">
+            <input type="hidden" name="id" th:value="${user.getId()}">
+            <input type="submit" value="Edit"/>
         </form>
         <hr/>
     </div>
     <br/>
     <hr/>
-    <a href="users/new">Create new user!</a>
+    <a href="admin/new">Create new user!</a>
 </body>
 </html>

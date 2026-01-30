@@ -1,6 +1,8 @@
 package bm.com.spring_mvc_boot.service;
 
+import bm.com.spring_mvc_boot.model.Role;
 import bm.com.spring_mvc_boot.model.User;
+import bm.com.spring_mvc_boot.repository.RoleRepository;
 import bm.com.spring_mvc_boot.repository.UserRepository;
 import bm.com.spring_mvc_boot.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,15 +20,17 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
     }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.findByUsername(username);
+        Optional<User> optionalUser = userRepository.findByLogin(username);
 
         if (optionalUser.isEmpty())
             throw new UsernameNotFoundException(username);
@@ -37,6 +41,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void save(User user) {
+        Role roleUser = roleRepository.findByRole("ROLE_USER").get();
+        user.getRoles().add(roleUser);
         userRepository.save(user);
     }
 
