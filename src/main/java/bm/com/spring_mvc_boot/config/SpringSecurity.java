@@ -33,7 +33,11 @@ public class SpringSecurity {
                         .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
-                .userDetailsService(userServiceImpl);
+                .userDetailsService(userServiceImpl)
+                .logout(logt -> logt
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/auth/login")
+                );
 
         return http.build();
     }
