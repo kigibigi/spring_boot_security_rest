@@ -20,16 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping()
-    public String show(@RequestParam(value = "id") Long id,
-                       Model model) {
-        model.addAttribute("user", userService.findById(id));
+    @GetMapping("/myPage")
+    public String pageAuthUser(Model model) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-//
-//        System.out.println(authentication.getAuthorities());
-//        System.out.println(userDetails.getUser().getRoles());
+        model.addAttribute("user", userService.findById(userDetails.getUser().getId()));
 
         return "users/show";
     }

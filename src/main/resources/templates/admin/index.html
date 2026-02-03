@@ -6,8 +6,9 @@
 </head>
 <body>
     <div th:each="user : ${users}">
-        <a th:href="@{/user?id={id}(id=${user.getId()})}"
-           th:text="${user.getId()} + '. ' + ${user.getFirstName()} + ' ' + ${user.getLastName}"/>
+<!--        <a th:href="@{/user?id={id}(id=${user.getId()})}"-->
+<!--           th:text="${user.getId()} + '. ' + ${user.getFirstName()} + ' ' + ${user.getLastName}"/>-->
+        <a th:text="${user.getId()} + '. ' + ${user.getFirstName()} + ' ' + ${user.getLastName}"/>
 
         <form th:method="DELETE" th:action="@{/admin?id={id}(id=${user.getId()})}">
             <input type="submit" value="Delete!">
