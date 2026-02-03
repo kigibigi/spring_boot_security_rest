@@ -24,12 +24,12 @@ public class AdminController {
     @GetMapping
     public String index(Model model) {
         model.addAttribute("users", userService.findAll());
-        return "/admin/index";
+        return "admin/index";
     }
 
     @GetMapping("/new")
     public String newUser(@ModelAttribute User user) {
-        return "/admin/new";
+        return "admin/new";
     }
 
     @PostMapping()

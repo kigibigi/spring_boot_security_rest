@@ -2,6 +2,8 @@ package bm.com.spring_mvc_boot.config;
 
 import bm.com.spring_mvc_boot.service.UserService;
 import bm.com.spring_mvc_boot.service.UserServiceImpl;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@Slf4j
 public class SpringSecurity {
 
     private final UserService userService;
@@ -25,11 +28,14 @@ public class SpringSecurity {
         this.userServiceImpl = userServiceImpl;
     }
 
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+
         http
                 .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(autmz -> autmz
-                        .requestMatchers("admin/new").permitAll()
+                        .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/user", "/user/**").hasAuthority("ROLE_USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(Customizer.withDefaults())
