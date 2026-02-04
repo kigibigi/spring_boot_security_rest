@@ -1,12 +1,14 @@
 package bm.com.spring_mvc_boot.config;
 
 import bm.com.spring_mvc_boot.security.RoleLoginSuccessHandler;
+import bm.com.spring_mvc_boot.security.UserDetailsServiceImpl;
 import bm.com.spring_mvc_boot.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -15,20 +17,19 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SpringSecurity {
 
-    private final UserServiceImpl userServiceImpl;
+    private final UserDetailsServiceImpl userDetailsService;
     private final RoleLoginSuccessHandler handler;
 
     @Autowired
-    public SpringSecurity(UserServiceImpl userServiceImpl, RoleLoginSuccessHandler hundler) {
-        this.userServiceImpl = userServiceImpl;
-        this.handler = hundler;
+    public SpringSecurity(UserDetailsServiceImpl userDetailsService, RoleLoginSuccessHandler handler) {
+        this.userDetailsService = userDetailsService;
+        this.handler = handler;
     }
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http
-                .csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(autmz -> autmz
                         .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
                         .requestMatchers("/user", "/user/**").hasAuthority("ROLE_USER")
@@ -37,7 +38,7 @@ public class SpringSecurity {
                 .formLogin(form -> form
                         .successHandler(handler)
                 )
-                .userDetailsService(userServiceImpl)
+                .userDetailsService(userDetailsService)
                 .logout(logt -> logt
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/login")
@@ -47,7 +48,7 @@ public class SpringSecurity {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return NoOpPasswordEncoder.getInstance();
+    public PasswordEncoder getPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }
