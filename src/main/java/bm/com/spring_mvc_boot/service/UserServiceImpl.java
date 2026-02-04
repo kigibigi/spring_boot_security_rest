@@ -4,38 +4,26 @@ import bm.com.spring_mvc_boot.model.Role;
 import bm.com.spring_mvc_boot.model.User;
 import bm.com.spring_mvc_boot.repository.RoleRepository;
 import bm.com.spring_mvc_boot.repository.UserRepository;
-import bm.com.spring_mvc_boot.security.UserDetailsImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private  final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
-    }
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> optionalUser = userRepository.findByLogin(username);
-
-        if (optionalUser.isEmpty())
-            throw new UsernameNotFoundException(username);
-
-        return new UserDetailsImpl(optionalUser.get());
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
@@ -43,6 +31,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void save(User user) {
         Role roleUser = roleRepository.findByRole("ROLE_USER").get();
         user.getRoles().add(roleUser);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
 
@@ -66,6 +55,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void update(Long id, User updatedUser) {
         updatedUser.setId(id);
+        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         userRepository.save(updatedUser);
     }
 }
