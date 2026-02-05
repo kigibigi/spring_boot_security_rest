@@ -32,7 +32,7 @@ public class SpringSecurity {
         http
                 .authorizeHttpRequests(autmz -> autmz
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/user/**").hasAuthority("ROLE_USER")
+                        .requestMatchers("/user/myPage").hasAuthority("ROLE_USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
