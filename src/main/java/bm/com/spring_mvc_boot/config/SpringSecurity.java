@@ -27,12 +27,12 @@ public class SpringSecurity {
     }
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain getSecurityFilterChain(HttpSecurity http) throws Exception {
 
         http
                 .authorizeHttpRequests(autmz -> autmz
-                        .requestMatchers("/admin", "/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/user", "/user/**").hasAuthority("ROLE_USER")
+                        .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
+                        .requestMatchers("/user/**").hasAuthority("ROLE_USER")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form

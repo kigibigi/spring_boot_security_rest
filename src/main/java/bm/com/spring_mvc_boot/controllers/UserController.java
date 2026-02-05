@@ -21,7 +21,7 @@ public class UserController {
     }
 
     @GetMapping("/myPage")
-    public String pageAuthUser(Model model) {
+    public String getPageAuthUser(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 

@@ -16,20 +16,20 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private  final PasswordEncoder passwordEncoder;
+    private final RoleService roleService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder, RoleService roleService) {
         this.userRepository = userRepository;
-        this.roleRepository = roleRepository;
+        this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Transactional
     @Override
     public void save(User user) {
-        Role roleUser = roleRepository.findByRole("ROLE_USER").get();
+        Role roleUser = roleService.getRoleUser();
         user.getRoles().add(roleUser);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);

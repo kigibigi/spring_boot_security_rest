@@ -22,38 +22,38 @@ public class AdminController {
     }
 
     @GetMapping
-    public String index(Model model) {
+    public String getAdminPage(Model model) {
         model.addAttribute("users", userService.findAll());
         return "admin/index";
     }
 
     @GetMapping("/new")
-    public String newUser(@ModelAttribute User user) {
+    public String getPageCreateUser(@ModelAttribute User user) {
         return "admin/new";
     }
 
     @PostMapping()
-    public String create(@ModelAttribute User user) {
+    public String createUser(@ModelAttribute User user) {
         userService.save(user);
         return "redirect:/admin";
     }
 
     @GetMapping("/update")
-    public String edit(@RequestParam(name = "id") Long id,
+    public String editUser(@RequestParam(name = "id") Long id,
                        Model model) {
         model.addAttribute("user", userService.findById(id));
         return "admin/edit";
     }
 
     @PatchMapping()
-    public String update(@ModelAttribute User user,
+    public String updateUser(@ModelAttribute User user,
                          @RequestParam(name = "id") Long id) {
         userService.update(id, user);
         return "redirect:/admin";
     }
 
     @DeleteMapping()
-    public String delete(@RequestParam(name = "id") Long id) {
+    public String deleteUser(@RequestParam(name = "id") Long id) {
         userService.delete(id);
         return "redirect:/admin";
     }

@@ -10,7 +10,9 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users")
-@Getter @Setter @ToString
+@Getter
+@Setter
+@ToString
 public class User {
 
     @Id
@@ -23,16 +25,9 @@ public class User {
     @Column(name = "last_name")
     private String lastName;
 
-    @Column
     private int age;
-
-    @Column
     private String email;
-
-    @Column
     private String login;
-
-    @Column
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)

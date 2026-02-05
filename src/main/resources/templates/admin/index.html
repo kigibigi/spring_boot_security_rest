@@ -6,8 +6,8 @@
 </head>
 <body>
     <div th:each="user : ${users}">
-<!--        <a th:href="@{/user?id={id}(id=${user.getId()})}"-->
-<!--           th:text="${user.getId()} + '. ' + ${user.getFirstName()} + ' ' + ${user.getLastName}"/>-->
+        <!--        <a th:href="@{/user?id={id}(id=${user.getId()})}"-->
+        <!--           th:text="${user.getId()} + '. ' + ${user.getFirstName()} + ' ' + ${user.getLastName}"/>-->
         <a th:text="${user.getId()} + '. ' + ${user.getFirstName()} + ' ' + ${user.getLastName}"/>
 
         <form th:method="DELETE" th:action="@{/admin?id={id}(id=${user.getId()})}">
@@ -23,6 +23,8 @@
     <br/>
     <hr/>
     <a href="admin/new">Create new user!</a>
+    <hr/>
+    <a href="/user/myPage"> Go to my page!</a>
 
     <form th:action="@{/logout}" th:method="POST">
         <input type="submit" value="Logout"/>
