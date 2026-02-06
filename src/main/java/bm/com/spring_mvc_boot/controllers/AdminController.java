@@ -1,6 +1,5 @@
 package bm.com.spring_mvc_boot.controllers;
 
-import bm.com.spring_mvc_boot.model.Role;
 import bm.com.spring_mvc_boot.model.User;
 import bm.com.spring_mvc_boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,15 +38,13 @@ public class AdminController {
     }
 
     @GetMapping("/update")
-    public String editUser(@RequestParam(name = "id") Long id,
-                       Model model) {
+    public String editUser(@RequestParam(name = "id") Long id, Model model) {
         model.addAttribute("user", userService.findById(id));
         return "admin/edit";
     }
 
     @PatchMapping()
-    public String updateUser(@ModelAttribute User user,
-                         @RequestParam(name = "id") Long id) {
+    public String updateUser(@ModelAttribute User user, @RequestParam(name = "id") Long id) {
         userService.update(id, user);
         return "redirect:/admin";
     }

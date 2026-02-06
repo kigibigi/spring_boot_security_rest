@@ -2,7 +2,6 @@ package bm.com.spring_mvc_boot.service;
 
 import bm.com.spring_mvc_boot.model.Role;
 import bm.com.spring_mvc_boot.model.User;
-import bm.com.spring_mvc_boot.repository.RoleRepository;
 import bm.com.spring_mvc_boot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;

@@ -2,14 +2,12 @@ package bm.com.spring_mvc_boot.config;
 
 import bm.com.spring_mvc_boot.security.RoleLoginSuccessHandler;
 import bm.com.spring_mvc_boot.security.UserDetailsServiceImpl;
-import bm.com.spring_mvc_boot.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -32,7 +30,7 @@ public class SpringSecurity {
         http
                 .authorizeHttpRequests(autmz -> autmz
                         .requestMatchers("/admin/**").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/user/myPage").hasAuthority("ROLE_USER")
+                        .requestMatchers("/user/**").hasAnyAuthority("ROLE_USER", "ROLE_ADMIN")
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
