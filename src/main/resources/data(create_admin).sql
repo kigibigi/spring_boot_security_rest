@@ -1,5 +1,5 @@
-# login = admin
-# password = test_password
+-- login = admin
+-- password = test_password
 
 INSERT INTO users(age, email, first_name, last_name, login, password)
 VALUE (23, 'admin@email.com', 'Admin_name', 'Admin_lastname', 'admin', '$2a$10$SfBUQubvrSbK8tG6CF2DneKn0fvUWMMlJt2nu5vrib08dbtbDnBde');
@@ -10,6 +10,4 @@ VALUES (1, 1),
 
 INSERT INTO roles(role)
 VALUES ('ROLE_USER'),
-      ('ROLE_ADMIN');
-
-
+       ('ROLE_ADMIN');
