@@ -79,9 +79,9 @@
                             <td th:text="${user.getAge()}">age</td>
                             <td th:text="${user.getEmail()}">email</td>
                             <td>
-                                <span th:each="role, iter : ${user.roles}"> <!-- user.roles -->
-                                    <span th:text="${role.authority}">ROLE_ADMIN</span>
-                                    <span th:unless="${iter.last}">, </span>
+                                 <span th:each="role, iter : ${user.roles}">
+                                    <span th:text="${role.getNameRole()}">ROLE</span>
+                                    <span th:unless="${iter.last}"> </span> <!-- пробел вместо запятой -->
                                 </span>
                             </td>
                             <td>

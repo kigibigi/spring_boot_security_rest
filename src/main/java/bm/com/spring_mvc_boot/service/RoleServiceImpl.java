@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional(readOnly = true)
 public class RoleServiceImpl implements RoleService {
@@ -21,4 +23,15 @@ public class RoleServiceImpl implements RoleService {
     public Role getRoleUser() {
         return roleRepository.findByRole("ROLE_USER").get();
     }
+
+    @Override
+    public List<Role> getAllRoles() {
+        return roleRepository.findAll();
+    }
+
+    @Override
+    public Role getRoleByName(String roleName) {
+        return roleRepository.findByRole("ROLE_" + roleName).get();
+    }
+
 }

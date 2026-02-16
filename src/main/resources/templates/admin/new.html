@@ -20,7 +20,9 @@
 </div>
 
 <div class="row">
-    <!--            Навигация       -->
+    <!--
+            Навигация (панель слева)
+    -->
     <div class="col-2">
         <ul class="nav flex-column nav-pills">
             <li class="nav-item" sec:authorize="hasRole('ADMIN')">
@@ -32,13 +34,18 @@
         </ul>
     </div>
 
+
+    <!--
+            Панель админа/юзера
+    -->
     <div class="col-10">
         <div class="row">
             <h3> Admin panel </h3>
         </div>
 
-
         <div class="row">
+
+
             <!--  Создание пользователя и таблица-->
             <ul class="nav nav-tabs">
                 <li class="nav-item">
@@ -75,6 +82,15 @@
             <label for="email">Email : </label>
             <input type="text" th:field="*{email}" id="email">
             <br/>
+            <label for="role">Role : </label>
+            <select id="role" name="role" class="form-select" size="2">
+                <div th:each="role : ${roles}">
+                    <option selected th:text="${role.getNameRole()}"/>
+                </div>
+            </select>
+<!--            <label for="role">Role : </label>-->
+<!--            <input type="text" th:field="*{role}" id="role">-->
+<!--            <br/>-->
             <input type="submit" value="Create!">
         </form>
     </div>

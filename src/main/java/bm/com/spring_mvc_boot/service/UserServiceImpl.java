@@ -27,9 +27,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void save(User user) {
-        Role roleUser = roleService.getRoleUser();
-        user.getRoles().add(roleUser);
+    public void save(User user, String roleName) {
+//        Role roleUser = roleService.getRoleUser();
+//        user.getRoles().add(roleUser);
+        user.getRoles().add(roleService.getRoleByName(roleName));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
@@ -52,9 +53,10 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void update(Long id, User updatedUser) {
+    public void update(Long id, User updatedUser, String roleName) {
         updatedUser.setId(id);
         updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        updatedUser.getRoles().add(roleService.getRoleByName(roleName));
         userRepository.save(updatedUser);
     }
 }
