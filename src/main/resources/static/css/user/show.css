@@ -24,60 +24,60 @@
 /*_______________________
         САЙФБОРД
  ________________________*/
-.col-left {
-    background: #f1fafa;
-    h {
-        background: blue;
-        color: white;
-    }
-}
+/*.col-left {*/
+/*    background: #f1fafa;*/
+/*    h {*/
+/*        background: blue;*/
+/*        color: white;*/
+/*    }*/
+/*}*/
 
 /*_______________________________
         Панель админа/юзера
 ________________________________*/
-.col-table {
-    background: #efedec;
+/*.col-table {*/
+/*    background: #efedec;*/
 
-    .container_about_user {
-        border: 2px solid #8f9195; /* Серая рамка */
-        border-radius: 6px; /* Скругленные углы */
+/*    .container_about_user {*/
+/*        border: 2px solid #8f9195; !* Серая рамка *!*/
+/*        border-radius: 6px; !* Скругленные углы *!*/
 
-        .row_about-user {
-            border-bottom: 2px solid #8f9195;
-            padding-top: 5px;
-            padding-bottom: 5px;
-        }
+/*        .row_about-user {*/
+/*            border-bottom: 2px solid #8f9195;*/
+/*            padding-top: 5px;*/
+/*            padding-bottom: 5px;*/
+/*        }*/
 
-        .text_about-user {
+/*        .text_about-user {*/
 
-        }
+/*        }*/
 
-        .row__user_table {
-            background: #fff9f9;
-            /*overflow-x: auto;*/
-            /*width: 100%;*/
-            padding: 10px;
+/*        .row__user_table {*/
+/*            background: #fff9f9;*/
+/*            !*overflow-x: auto;*!*/
+/*            !*width: 100%;*!*/
+/*            padding: 10px;*/
 
-            .table {
-                width: 100%;
-                table-layout: fixed; /* Фиксированная ширина колонок */
-                margin: 0;
+/*            .table {*/
+/*                width: 100%;*/
+/*                table-layout: fixed; !* Фиксированная ширина колонок *!*/
+/*                margin: 0;*/
 
-                th, td {
-                    overflow: hidden;
-                    white-space: nowrap;
-                    padding: 10px;
+/*                th, td {*/
+/*                    overflow: hidden;*/
+/*                    white-space: nowrap;*/
+/*                    padding: 10px;*/
 
 
-                    /* Распределение ширины колонок */
-                    &:nth-child(1) { width: 5%; }   /* ID */
-                    &:nth-child(2) { width: 15%; }  /* First Name */
-                    &:nth-child(3) { width: 15%; }  /* Last Name */
-                    &:nth-child(4) { width: 10%; }   /* Age */
-                    &:nth-child(5) { width: 30%; }  /* Email */
-                    &:nth-child(6) { width: 25%; }  /* Role */
-                }
-            }
-        }
-    }
-}
+/*                    !* Распределение ширины колонок *!*/
+/*                    &:nth-child(1) { width: 5%; }   !* ID *!*/
+/*                    &:nth-child(2) { width: 15%; }  !* First Name *!*/
+/*                    &:nth-child(3) { width: 15%; }  !* Last Name *!*/
+/*                    &:nth-child(4) { width: 10%; }   !* Age *!*/
+/*                    &:nth-child(5) { width: 30%; }  !* Email *!*/
+/*                    &:nth-child(6) { width: 25%; }  !* Role *!*/
+/*                }*/
+/*            }*/
+/*        }*/
+/*    }*/
+/*}*/

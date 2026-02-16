@@ -7,6 +7,33 @@
 </head>
 <body>
 
+<div th:fragment="updateUserModal" class="modal fade" id="updateUserModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+<!--&lt;!&ndash;            &ndash;&gt;<form th:method="PATCH" th:action="@{/admin?id={id}(id=${user.getId()})}" th:object="${user}">-->
+                <div class="modal-header">
+                    <h5 class="modal-title">Edit user</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    здесь меняют пользователя!
+<!--                    <label for="firstName">First Name : </label>-->
+<!--                    <input type="text" th:field="*{firstName}" id="firstName">-->
+<!--                    <br/><label for="lastName">Last Name : </label>-->
+<!--                    <input type="text" th:field="*{lastName}" id="lastName">-->
+<!--                    <br/>-->
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Edit</button>
+                </div>
+<!--            </form>&lt;!&ndash;&ndash;&gt;-->
+        </div>
+    </div>
+</div>
+
 <form th:method="PATCH" th:action="@{/admin?id={id}(id=${user.getId()})}" th:object="${user}">
     <label for="firstName">First Name : </label>
     <input type="text" th:field="*{firstName}" id="firstName">

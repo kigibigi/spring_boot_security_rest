@@ -39,4 +39,9 @@ public class Role implements GrantedAuthority {
     public @Nullable String getAuthority() {
         return this.role;
     }
+
+    @Override
+    public String toString() {
+        return role;
+    }
 }

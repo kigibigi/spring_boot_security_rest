@@ -1,0 +1,22 @@
+/* ____________________________-
+           ШАПКА
+  _______________________________*/
+
+.row-head {
+    background: #3f4242;
+    display: table;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+    .email {
+        display: table-cell;
+        vertical-align: middle;
+        color: #ebf2f4;
+    }
+
+    .logout
+    {
+        width: 100%;
+    }
+}
