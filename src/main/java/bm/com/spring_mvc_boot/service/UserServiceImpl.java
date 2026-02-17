@@ -56,6 +56,7 @@ public class UserServiceImpl implements UserService {
     public void update(Long id, User updatedUser, String roleName) {
         updatedUser.setId(id);
         updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        updatedUser.getRoles().clear();
         updatedUser.getRoles().add(roleService.getRoleByName(roleName));
         userRepository.save(updatedUser);
     }

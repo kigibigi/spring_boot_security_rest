@@ -27,7 +27,6 @@ public class User {
 
     private int age;
     private String email;
-    private String login;
     private String password;
 
     @ManyToMany(fetch = FetchType.EAGER)
@@ -39,10 +38,4 @@ public class User {
     public User() {
     }
 
-    public User(String firstName, String lastName, int age, String email) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.email = email;
-    }
 }
