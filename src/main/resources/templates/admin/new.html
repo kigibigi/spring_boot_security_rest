@@ -12,88 +12,111 @@
 <div class="container">
 
     <div class="row row-head align">
-        <p class="email" th:text="${admin.getEmail()}">VALUE</p>
+        <div class="d-flex align-items-center text_head">
+            <span class="email" th:text="${admin.getEmail()}">VALUE</span>
+            <span> with roles:</span>
+            <span th:each="role, iter : ${admin.roles}">
+                    <span th:text="${role.getNameRole()}">ROLE</span>
+                    <span th:unless="${iter.last}"> </span>
+                </span>
+        </div>
+
         <form class="logout" th:action="@{/logout}" th:method="POST">
             <input type="submit" value="Logout"/>
         </form>
     </div>
-</div>
 
-<div class="row">
-    <!--
-            Навигация (панель слева)
-    -->
-    <div class="col-2">
-        <ul class="nav flex-column nav-pills">
-            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
-            </li>
-            <li class="nav-item" sec:authorize="hasRole('USER')">
-                <a class="nav-link" aria-current="page" href="/user/myPage">User</a>
-            </li>
-        </ul>
-    </div>
-
-
-    <!--
-            Панель админа/юзера
-    -->
-    <div class="col-10">
-        <div class="row">
-            <h3> Admin panel </h3>
-        </div>
-
-        <div class="row">
-
-
-            <!--  Создание пользователя и таблица-->
-            <ul class="nav nav-tabs">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/admin"> Users table </a>
+    <div class="row row-body">
+        <!--            Навигация       -->
+        <div class="col-2 col_navigation">
+            <ul class="nav flex-column nav-pills">
+                <li class="nav-item" sec:authorize="hasRole('ADMIN')">
+                    <a class="nav-link active" aria-current="page" href="/admin">Admin</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link active disabled" aria-current="page" href="new.html">New user</a>
+                <li class="nav-item" sec:authorize="hasRole('USER')">
+                    <a class="nav-link" aria-current="page" href="/user/myPage">User</a>
                 </li>
             </ul>
-            <hr>
         </div>
 
-        <div class="row">
-            <h> Add new user </h>
-            <hr>
-        </div>
-        <form th:method="POST" th:action="@{/admin}" th:object="${user}">
-            <label for="login"> Login : </label>
-            <input type="text" th:field="*{login}" id="login">
-            <br/>
-            <label for="email"> Password : </label>
-            <input type="password" th:field="*{password}" id="password">
-            <br/>
-            <hr/>
-            <label for="firstName">First Name : </label>
-            <input type="text" th:field="*{firstName}" id="firstName">
-            <br/><label for="lastName">Last Name : </label>
-            <input type="text" th:field="*{lastName}" id="lastName">
-            <br/>
-            <label for="age">Age : </label>
-            <input type="text" th:field="*{age}" id="age">
-            <br/>
-            <label for="email">Email : </label>
-            <input type="text" th:field="*{email}" id="email">
-            <br/>
-            <label for="role">Role : </label>
-            <select id="role" name="role" class="form-select" size="2">
-                <div th:each="role : ${roles}">
-                    <option selected th:text="${role.getNameRole()}"/>
+        <div class="col-10 col_table">
+
+            <div class="row row_heading">
+                <h2> Admin panel </h2>
+            </div>
+
+
+            <!--
+                                Горизонтальная навигация (создание пользователя и таблица)
+            -->
+            <div class="row">
+                <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="/admin"> Users table </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link active disabled" aria-current="page" href="/admin/new">New user</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="row row_name_table">
+                <h5> Add new user </h5>
+            </div>
+
+<!--            Окно добавления юзера           -->
+            <div class="row row_window_add_user">
+                <div class="col-3 col_left"></div>
+
+
+                <div class="col-6 col_middle">
+                    <form th:method="POST" th:action="@{/admin}" th:object="${user}">
+                        <!--                    <label for="login"> Login : </label>-->
+                        <!--                    <input type="text" th:field="*{login}" id="login">-->
+                        <!--                    <br/>-->
+                        <div>
+                            <label for="firstName">First Name </label>
+                            <input type="text" th:field="*{firstName}" id="firstName">
+                        </div>
+                        <div>
+                            <label for="lastName">Last Name </label> <br>
+                            <input type="text" th:field="*{lastName}" id="lastName">
+                        </div>
+                        <div>
+                            <label for="age">Age </label> <br>
+                            <input type="text" th:field="*{age}" id="age">
+                        </div>
+                        <div>
+                            <label for="email">Email </label> <br>
+                            <input type="text" th:field="*{email}" id="email">
+                        </div>
+                        <div>
+                            <label for="email"> Password </label> <br>
+                            <input type="password" th:field="*{password}" id="password">
+                        </div>
+                        <div>
+                            <label for="role"> Role </label> <br>
+                            <select id="role" name="role" class="form-select" size="2">
+                                <div class="without_margin" th:each="role : ${roles}">
+                                    <option selected th:text="${role.getNameRole()}"/>
+                                </div>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-success">Add new User!</button>
+                    </form>
                 </div>
-            </select>
-<!--            <label for="role">Role : </label>-->
-<!--            <input type="text" th:field="*{role}" id="role">-->
-<!--            <br/>-->
-            <input type="submit" value="Create!">
-        </form>
+
+
+                <div class="col-3 col_right"></div>
+
+            </div>
+
+        </div>
     </div>
 </div>
+
+
+
 </body>
 </html>

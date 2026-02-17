@@ -1,83 +1,132 @@
-/*@media (min-width: 992px) {*/
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
+}
+
 
 /* ____________________________-
            ШАПКА
   _______________________________*/
-
 .row-head {
-    background: #3f4242;
-    display: table;
-    width: 100%;
+    /*background: #3f4242;*/
+    /*display: table;*/
+    /*width: 100%;*/
+    /*padding-top: 10px;*/
+    /*padding-bottom: 10px;*/
+    /*margin-left: 0;*/
+    /*margin-right: 0;*/
 
-    .email {
-        display: table-cell;
-        vertical-align: middle;
+    /*.email {*/
+    /*    display: table-cell;*/
+    /*    vertical-align: middle;*/
+    /*    color: #ebf2f4;*/
+    /*}*/
+
+    /*.logout*/
+    /*{*/
+    /*    width: 100%;*/
+    /*}*/
+    background: #3f4242;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-left: 0;
+    margin-right: 0;
+
+    .text_head {
+        display: flex;
+        align-items: center;
+        gap: 5px;
         color: #ebf2f4;
+        flex: 1;
     }
 
-    .logout
-    {
-        width: 100%;
+    .email {
+        font-weight: bold;
+    }
+
+    .logout {
+        width: auto;
+    }
+
+    .logout input {
+        background: none;
+        border: none;
+        color: #888;  /* серый блеклый */
+        padding: 0;
+        cursor: pointer;
+        font-size: inherit;
+        font-family: inherit;
+    }
+
+    .logout input:hover {
+        color: #bbb;  /* чуть светлее при наведении */
     }
 }
 
-/*_______________________
-        САЙФБОРД
- ________________________*/
-/*.col-left {*/
-/*    background: #f1fafa;*/
-/*    h {*/
-/*        background: blue;*/
-/*        color: white;*/
-/*    }*/
-/*}*/
+/* ____________________________-
+           Основа
+  _______________________________*/
+.row-body {
 
-/*_______________________________
-        Панель админа/юзера
-________________________________*/
-/*.col-table {*/
-/*    background: #efedec;*/
+    .col-2 {
+        background-color: white;
+    }
 
-/*    .container_about_user {*/
-/*        border: 2px solid #8f9195; !* Серая рамка *!*/
-/*        border-radius: 6px; !* Скругленные углы *!*/
+    .col_navigation {
+        padding-top: 1%;
+        padding-right: 0 !important;
+    }
 
-/*        .row_about-user {*/
-/*            border-bottom: 2px solid #8f9195;*/
-/*            padding-top: 5px;*/
-/*            padding-bottom: 5px;*/
-/*        }*/
+    .row_heading {
+        padding-top: 1%;
+    }
 
-/*        .text_about-user {*/
+    .col_table {
 
-/*        }*/
+        .row {
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
 
-/*        .row__user_table {*/
-/*            background: #fff9f9;*/
-/*            !*overflow-x: auto;*!*/
-/*            !*width: 100%;*!*/
-/*            padding: 10px;*/
+        .row_name_table {
+            h5 {
+                margin: 0;
+            }
+            padding: 1%;
+            border: 1px solid #dee2e6;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
 
-/*            .table {*/
-/*                width: 100%;*/
-/*                table-layout: fixed; !* Фиксированная ширина колонок *!*/
-/*                margin: 0;*/
+        .row_table {
 
-/*                th, td {*/
-/*                    overflow: hidden;*/
-/*                    white-space: nowrap;*/
-/*                    padding: 10px;*/
+            .table {
+                margin-bottom: 0;
+                border-top: 1px solid #dee2e6;
+            }
+            border-left: 1px solid #dee2e6;
+            border-right: 1px solid #dee2e6;
+            border-bottom: 1px solid #dee2e6;
+            border-bottom-left-radius: 5px;
+            border-bottom-right-radius: 5px;
+            padding: 2%;
+            background-color: white;
+        }
 
-
-/*                    !* Распределение ширины колонок *!*/
-/*                    &:nth-child(1) { width: 5%; }   !* ID *!*/
-/*                    &:nth-child(2) { width: 15%; }  !* First Name *!*/
-/*                    &:nth-child(3) { width: 15%; }  !* Last Name *!*/
-/*                    &:nth-child(4) { width: 10%; }   !* Age *!*/
-/*                    &:nth-child(5) { width: 30%; }  !* Email *!*/
-/*                    &:nth-child(6) { width: 25%; }  !* Role *!*/
-/*                }*/
-/*            }*/
-/*        }*/
-/*    }*/
-/*}*/
+        padding-top: 1%;
+        padding-right: 2%;
+        padding-left: 2%;
+        background-color: #f2f2f2;
+        min-height: 100vh;
+    }
+}
