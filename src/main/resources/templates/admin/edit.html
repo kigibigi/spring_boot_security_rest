@@ -7,54 +7,246 @@
 </head>
 <body>
 
-<div th:fragment="updateUserModal" class="modal fade" id="updateUserModal" tabindex="-1">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-<!--&lt;!&ndash;            &ndash;&gt;<form th:method="PATCH" th:action="@{/admin?id={id}(id=${user.getId()})}" th:object="${user}">-->
+<div th:fragment="updateUserModal">
+    <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Edit user</h5>
+                    <h5 class="modal-title" id="updateUserModalLabel">Edit User</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
-                <div class="modal-body">
-                    здесь меняют пользователя!
-<!--                    <label for="firstName">First Name : </label>-->
-<!--                    <input type="text" th:field="*{firstName}" id="firstName">-->
-<!--                    <br/><label for="lastName">Last Name : </label>-->
-<!--                    <input type="text" th:field="*{lastName}" id="lastName">-->
-<!--                    <br/>-->
-                </div>
+                <form th:method="PATCH" th:action="@{/admin}" id="editUserForm">
+                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>
+                    <div class="modal-body">
+                        <input type="hidden" name="id" id="editUserId">
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Edit</button>
-                </div>
-<!--            </form>&lt;!&ndash;&ndash;&gt;-->
+                        <div class="mb-3">
+                            <label for="firstName">First Name</label>
+                            <input type="text" name="firstName" id="firstName">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" name="lastName" id="lastName">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="age">Age</label>
+                            <input type="text" name="age" id="age">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email">Email</label>
+                            <input type="text" name="email" id="email">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" name="password" id="password">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="role">Role</label> <br>
+                            <select id="role" name="role" class="form-select" size="2">
+                                <div class="without_margin" th:each="role : ${roles}">
+                                    <option th:text="${role.getNameRole()}" th:value="${role.getNameRole()}"/>
+                                </div>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="submit" class="btn btn-success">Edit!</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
 </div>
 
-<form th:method="PATCH" th:action="@{/admin?id={id}(id=${user.getId()})}" th:object="${user}">
-    <label for="firstName">First Name : </label>
-    <input type="text" th:field="*{firstName}" id="firstName">
-    <br/><label for="lastName">Last Name : </label>
-    <input type="text" th:field="*{lastName}" id="lastName">
-    <br/>
-    <label for="age">Age : </label>
-    <input type="text" th:field="*{age}" id="age">
-    <br/>
-    <label for="email">Email : </label>
-    <input type="text" th:field="*{email}" id="email">
-    <br/>
-    <hr/>
-    <label for="login">Login : </label>
-    <input type="text" th:field="*{login}" id="login">
-    <br/>
-    <label for="password">Password : </label>
-    <input type="password" th:field="*{password}" id="password">
-    <br/>
-    <input type="submit" value="Update!">
-</form>
+<!-- Фрагмент с модальным окном -->
+<!--<div th:fragment="updateUserModal">-->
+<!--    <div class="modal fade" id="updateUserModal" tabindex="-1" aria-labelledby="updateUserModalLabel" aria-hidden="true">-->
+<!--        <div class="modal-dialog">-->
+<!--            <div class="modal-content">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title" id="updateUserModalLabel">Edit User</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
 
+<!--                &lt;!&ndash; Форма редактирования &ndash;&gt;-->
+<!--                <form th:method="PATCH" th:action="@{/admin}" id="editUserForm">-->
+<!--                    <input type="hidden" name="_csrf" th:value="${_csrf.token}"/>-->
+<!--                    <div class="modal-body">-->
+<!--                        <input type="hidden" name="id" id="editUserId">-->
+
+<!--                        &lt;!&ndash; Тест внутри фрагмента &ndash;&gt;-->
+<!--                        <div style="background: lightblue; padding: 10px;">-->
+<!--                            <h4>Проверка ролей ВНУТРИ фрагмента:</h4>-->
+<!--                            <div th:if="${roles != null}" th:text="'Роли есть: ' + ${roles.size()}"></div>-->
+<!--                            <div th:unless="${roles != null}">Ролей нет внутри фрагмента!</div>-->
+<!--                        </div>-->
+
+<!--                        <div>-->
+<!--                            <label for="firstName">First Name </label>-->
+<!--                            <input type="text" name="firstName" id="firstName">-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="lastName">Last Name </label> <br>-->
+<!--                            <input type="text" name="lastName" id="lastName">-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="age">Age </label> <br>-->
+<!--                            <input type="text" name="age" id="age">-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="email">Email </label> <br>-->
+<!--                            <input type="text" name="email" id="email">-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="password"> Password </label> <br>-->
+<!--                            <input type="password" name="password" id="password">-->
+<!--                        </div>-->
+<!--                        &lt;!&ndash; Прямо перед вставкой модального окна &ndash;&gt;-->
+<!--                        <div style="background: yellow; padding: 10px;">-->
+<!--                            <h4>Проверка ролей в основной странице:</h4>-->
+<!--                            <div th:if="${roles != null}" th:text="'Роли есть: ' + ${roles.size()}"></div>-->
+<!--                            <div th:unless="${roles != null}">Ролей нет в основной странице!</div>-->
+
+<!--                            <select>-->
+<!--                                <option th:each="role : ${roles}"-->
+<!--                                        th:text="${role.getNameRole()}"-->
+<!--                                        th:value="${role.getNameRole()}"/>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                        <div>-->
+<!--                            <label for="role"> Role </label> <br>-->
+<!--                            <select id="role" name="role" class="form-select" size="2">-->
+<!--                                &lt;!&ndash; ВРЕМЕННО: проверим цикл &ndash;&gt;-->
+<!--                                <option th:each="role : ${roles}"-->
+<!--                                        th:text="${role.getNameRole()}"-->
+<!--                                        th:value="${role.getNameRole()}"/>-->
+<!--                                &lt;!&ndash; Если ролей нет, покажем заглушку &ndash;&gt;-->
+<!--                                <option th:if="${#lists.isEmpty(roles)}" value="" disabled>No roles available</option>-->
+<!--                            </select>-->
+<!--                        </div>-->
+<!--                    </div>-->
+
+<!--                    <div class="modal-footer">-->
+<!--                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>-->
+<!--                        <button type="submit" class="btn btn-success">Edit!</button>-->
+<!--                    </div>-->
+<!--                </form>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!--<div th:fragment="updateUserModal" class="modal fade" id="updateUserModal" tabindex="-1">-->
+<!--    <div class="modal-dialog modal-dialog-centered">-->
+<!--        <div class="modal-content">-->
+<!--            <form th:method="PATCH" th:action="@{/admin?id={id}(id=${user.getId()})}" th:object="${user}">-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Edit user</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+
+<!--                <div class="modal-body">-->
+<!--                    <div>-->
+<!--                        <label for="firstName">First Name</label>-->
+<!--                        <input type="text" th:field="*{firstName}" id="firstName">-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <label for="lastName">Last Name</label>-->
+<!--                        <input type="text" th:field="*{lastName}" id="lastName">-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <label for="age">Age</label>-->
+<!--                        <input type="text" th:field="*{age}" id="age">-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <label for="email">Email</label>-->
+<!--                        <input type="text" th:field="*{email}" id="email">-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <label for="password">Password</label>-->
+<!--                        <input type="password" th:field="*{password}" id="password">-->
+<!--                    </div>-->
+<!--                    <div>-->
+<!--                        <label for="role">Role</label>-->
+<!--                        <select id="role" name="role" class="form-select" size="2">-->
+<!--                            <option th:each="role : ${roles}"-->
+<!--                                    th:text="${role.getNameRole()}"-->
+<!--                                    th:selected="${user.roles.contains(role)}">-->
+<!--                            </option>-->
+<!--                        </select>-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                    <button type="submit" class="btn btn-primary">Edit</button>-->
+<!--                </div>-->
+<!--            </form>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<div th:fragment="updateUserModal" class="modal fade" id="updateUserModal" tabindex="-1">-->
+<!--    <div class="modal-dialog modal-dialog-centered">-->
+<!--        <div class="modal-content">-->
+<!--&lt;!&ndash;&lt;!&ndash;            &ndash;&gt;<form th:method="PATCH" th:action="@{/admin?id={id}(id=${user.getId()})}" th:object="${user}">&ndash;&gt;-->
+<!--                <div class="modal-header">-->
+<!--                    <h5 class="modal-title">Edit user</h5>-->
+<!--                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+<!--                </div>-->
+
+<!--                <div class="modal-body">-->
+<!--                    здесь меняют пользователя!-->
+<!--                </div>-->
+
+<!--                <div class="modal-footer">-->
+<!--                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>-->
+<!--                    <button type="submit" class="btn btn-primary">Edit</button>-->
+<!--                </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+<!--<form th:method="PATCH" th:action="@{/admin?id={id}(id=${user.getId()})}" th:object="${user}">-->
+<!--    <div>-->
+<!--        <label for="firstName">First Name </label>-->
+<!--        <input type="text" th:field="*{firstName}" id="firstName">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="lastName">Last Name </label> <br>-->
+<!--        <input type="text" th:field="*{lastName}" id="lastName">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="age">Age </label> <br>-->
+<!--        <input type="text" th:field="*{age}" id="age">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="email">Email </label> <br>-->
+<!--        <input type="text" th:field="*{email}" id="email">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="email"> Password </label> <br>-->
+<!--        <input type="password" th:field="*{password}" id="password">-->
+<!--    </div>-->
+<!--    <div>-->
+<!--        <label for="role"> Role </label> <br>-->
+<!--        <select id="role" name="role" class="form-select" size="2">-->
+<!--            <div class="without_margin" th:each="role : ${roles}">-->
+<!--                <option selected th:text="${role.getNameRole()}"/>-->
+<!--            </div>-->
+<!--        </select>-->
+<!--    </div>-->
+<!--    <button type="submit" class="btn btn-success">Edit!</button>-->
+<!--</form>-->
 </body>
 </html>

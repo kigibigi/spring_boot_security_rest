@@ -72,30 +72,27 @@
 
                 <div class="col-6 col_middle">
                     <form th:method="POST" th:action="@{/admin}" th:object="${user}">
-                        <!--                    <label for="login"> Login : </label>-->
-                        <!--                    <input type="text" th:field="*{login}" id="login">-->
-                        <!--                    <br/>-->
-                        <div>
+                        <div class="mb-3">
                             <label for="firstName">First Name </label>
                             <input type="text" th:field="*{firstName}" id="firstName">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="lastName">Last Name </label> <br>
                             <input type="text" th:field="*{lastName}" id="lastName">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="age">Age </label> <br>
                             <input type="text" th:field="*{age}" id="age">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="email">Email </label> <br>
                             <input type="text" th:field="*{email}" id="email">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="email"> Password </label> <br>
                             <input type="password" th:field="*{password}" id="password">
                         </div>
-                        <div>
+                        <div class="mb-3">
                             <label for="role"> Role </label> <br>
                             <select id="role" name="role" class="form-select" size="2">
                                 <div class="without_margin" th:each="role : ${roles}">

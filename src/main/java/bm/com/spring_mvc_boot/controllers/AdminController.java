@@ -31,6 +31,7 @@ public class AdminController {
     public String getAdminPage(Model model) {
         model.addAttribute("users", userService.findAll());
         model.addAttribute("admin", getUserDetailsFromPrincipal().getUser());
+        model.addAttribute("roles", roleService.getAllRoles());
         return "admin/index";
     }
 
@@ -47,12 +48,12 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-    @GetMapping("/update")
-    public String editUser(@RequestParam(name = "id") Long id, Model model) {
-        model.addAttribute("user", userService.findById(id));
-        model.addAttribute("roles", roleService.getAllRoles());
-        return "admin/edit";
-    }
+//    @GetMapping("/update")
+//    public String editUser(@RequestParam(name = "id") Long id, Model model) {
+//        model.addAttribute("user", userService.findById(id));
+//        model.addAttribute("roles", roleService.getAllRoles());
+//        return "admin/edit";
+//    }
 
     @PatchMapping()
     public String updateUser(@ModelAttribute User user, @RequestParam(name = "id") Long id, @RequestParam("role") String role) {
