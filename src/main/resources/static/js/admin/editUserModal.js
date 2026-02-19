@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('email').value = email;
             document.getElementById('password').value = '';
 
+            // Заполняем отображаемое поле ID
+            const displayUserId = document.getElementById('displayUserId');
+            if (displayUserId) {
+                displayUserId.value = userId;
+            }
+
             // Роли не трогаем - они уже загружены с сервера
             // Пользователь сам выберет нужную роль
 
