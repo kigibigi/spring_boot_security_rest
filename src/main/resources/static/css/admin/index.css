@@ -91,6 +91,10 @@ body {
             .table {
                 margin-bottom: 0;
                 border-top: 1px solid #dee2e6;
+
+                .edit-user-btn {
+                    color: white;
+                }
             }
             border-left: 1px solid #dee2e6;
             border-right: 1px solid #dee2e6;

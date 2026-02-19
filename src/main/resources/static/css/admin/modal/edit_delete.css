@@ -1,0 +1,14 @@
+.col_center {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+
+    label {
+        font-weight: bold;
+    }
+
+    input {
+        width: 100%;
+    }
+}
+
