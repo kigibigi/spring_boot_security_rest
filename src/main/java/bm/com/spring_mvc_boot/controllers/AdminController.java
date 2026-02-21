@@ -48,15 +48,8 @@ public class AdminController {
         return "redirect:/admin";
     }
 
-//    @GetMapping("/update")
-//    public String editUser(@RequestParam(name = "id") Long id, Model model) {
-//        model.addAttribute("user", userService.findById(id));
-//        model.addAttribute("roles", roleService.getAllRoles());
-//        return "admin/edit";
-//    }
-
     @PatchMapping()
-    public String updateUser(@ModelAttribute User user, @RequestParam(name = "id") Long id, @RequestParam("role") String role) {
+    public String updateUser(@ModelAttribute User user, @RequestParam(name = "id") Long id, @RequestParam(value = "role", required = false) String role) {
         userService.update(id, user, role);
         return "redirect:/admin";
     }

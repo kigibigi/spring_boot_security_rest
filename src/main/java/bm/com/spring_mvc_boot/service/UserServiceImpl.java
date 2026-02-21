@@ -55,9 +55,20 @@ public class UserServiceImpl implements UserService {
     @Override
     public void update(Long id, User updatedUser, String roleName) {
         updatedUser.setId(id);
-        updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
-        updatedUser.getRoles().clear();
-        updatedUser.getRoles().add(roleService.getRoleByName(roleName));
+
+        if (updatedUser.getPassword().isEmpty()) {
+            updatedUser.setPassword(findById(id).getPassword());
+        } else {
+            updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
+        }
+
+        if (roleName == null) {
+            updatedUser.setRoles(findById(id).getRoles());
+        } else {
+            updatedUser.getRoles().clear();
+            updatedUser.getRoles().add(roleService.getRoleByName(roleName));
+        }
+
         userRepository.save(updatedUser);
     }
 }
