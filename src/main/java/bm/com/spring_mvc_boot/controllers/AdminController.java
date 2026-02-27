@@ -1,6 +1,5 @@
 package bm.com.spring_mvc_boot.controllers;
 
-import bm.com.spring_mvc_boot.model.Role;
 import bm.com.spring_mvc_boot.model.User;
 import bm.com.spring_mvc_boot.security.UserDetailsImpl;
 import bm.com.spring_mvc_boot.service.RoleService;
@@ -11,8 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.HashSet;
 
 @Controller
 @RequestMapping("/admin")
@@ -30,39 +27,41 @@ public class AdminController {
     @GetMapping
     public String getAdminPage(Model model) {
         model.addAttribute("users", userService.findAll());
-        model.addAttribute("admin", getUserDetailsFromPrincipal().getUser());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        model.addAttribute("admin", userDetails.getUser());
         model.addAttribute("roles", roleService.getAllRoles());
         return "admin/index";
     }
 
     @GetMapping("/new")
     public String getPageCreateUser(@ModelAttribute User user, Model model) {
-        model.addAttribute("admin", getUserDetailsFromPrincipal().getUser());
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+
+        model.addAttribute("admin", userDetails.getUser());
         model.addAttribute("roles", roleService.getAllRoles());
         return "admin/new";
     }
 
     @PostMapping()
     public String createUser(@ModelAttribute User user, @RequestParam("role") String role) {
-        userService.save(user, role);
+        userService.saveUser(user, role);
         return "redirect:/admin";
     }
 
     @PatchMapping()
     public String updateUser(@ModelAttribute User user, @RequestParam(name = "id") Long id, @RequestParam(value = "role", required = false) String role) {
-        userService.update(id, user, role);
+        userService.updateUser(id, user, role);
         return "redirect:/admin";
     }
 
     @DeleteMapping()
     public String deleteUser(@RequestParam(name = "id") Long id) {
-        userService.delete(id);
+        userService.deleteUser(id);
         return "redirect:/admin";
-    }
-
-    private static UserDetailsImpl getUserDetailsFromPrincipal() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        return userDetails;
     }
 }

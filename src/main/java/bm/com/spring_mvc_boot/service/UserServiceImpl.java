@@ -1,6 +1,5 @@
 package bm.com.spring_mvc_boot.service;
 
-import bm.com.spring_mvc_boot.model.Role;
 import bm.com.spring_mvc_boot.model.User;
 import bm.com.spring_mvc_boot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,9 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void save(User user, String roleName) {
-//        Role roleUser = roleService.getRoleUser();
-//        user.getRoles().add(roleUser);
+    public void saveUser(User user, String roleName) {
         user.getRoles().add(roleService.getRoleByName(roleName));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRepository.save(user);
@@ -47,13 +44,13 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public void delete(Long id) {
+    public void deleteUser(Long id) {
         userRepository.deleteById(id);
     }
 
     @Transactional
     @Override
-    public void update(Long id, User updatedUser, String roleName) {
+    public void updateUser(Long id, User updatedUser, String roleName) {
         updatedUser.setId(id);
 
         if (updatedUser.getPassword().isEmpty()) {

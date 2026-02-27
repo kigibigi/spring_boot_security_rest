@@ -1,25 +1,25 @@
 package bm.com.spring_mvc_boot.config;
 
-import bm.com.spring_mvc_boot.security.RoleLoginSuccessHandler;
-import bm.com.spring_mvc_boot.security.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 
 @Configuration
 @EnableWebSecurity
-public class SpringSecurity {
+public class SpringSecurityConfiguration {
 
-    private final UserDetailsServiceImpl userDetailsService;
-    private final RoleLoginSuccessHandler handler;
+    private final UserDetailsService userDetailsService;
+    private final AuthenticationSuccessHandler handler;
 
     @Autowired
-    public SpringSecurity(UserDetailsServiceImpl userDetailsService, RoleLoginSuccessHandler handler) {
+    public SpringSecurityConfiguration(UserDetailsService userDetailsService, RoleLoginSuccessHandler handler) {
         this.userDetailsService = userDetailsService;
         this.handler = handler;
     }

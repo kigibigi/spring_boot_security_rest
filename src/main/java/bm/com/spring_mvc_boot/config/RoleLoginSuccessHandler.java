@@ -1,6 +1,7 @@
-package bm.com.spring_mvc_boot.security;
+package bm.com.spring_mvc_boot.config;
 
 import bm.com.spring_mvc_boot.model.Role;
+import bm.com.spring_mvc_boot.security.UserDetailsImpl;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

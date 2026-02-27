@@ -23,9 +23,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayUserId.value = userId;
             }
 
-            // Роли не трогаем - они уже загружены с сервера
-            // Пользователь сам выберет нужную роль
-
             // Обновляем action формы
             const form = document.getElementById('editUserForm');
             form.action = `/admin?id=${userId}`;
@@ -33,20 +30,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// // Временно добавьте тестовые значения, чтобы проверить, работает ли заполнение
-// document.addEventListener('DOMContentLoaded', function() {
-//     const editButtons = document.querySelectorAll('.edit-user-btn');
-//
-//     editButtons.forEach(button => {
-//         button.addEventListener('click', function() {
-//             // Тестовые данные для проверки
-//             document.getElementById('editUserId').value = '123';
-//             document.getElementById('firstName').value = 'TEST';
-//             document.getElementById('lastName').value = 'TEST';
-//             document.getElementById('age').value = '25';
-//             document.getElementById('email').value = 'test@test.com';
-//
-//             // Если поля заполнятся тестовыми данными, значит проблема в data-атрибутах
-//         });
-//     });
-// });

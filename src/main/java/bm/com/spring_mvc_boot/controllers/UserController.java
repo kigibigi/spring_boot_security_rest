@@ -24,17 +24,12 @@ public class UserController {
 
     @GetMapping("/myPage")
     public String getPageAuthUser(Model model) {
-        UserDetailsImpl userDetails = getUserDetailsFromPrincipal();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
         model.addAttribute("user", userService.findById(userDetails.getUser().getId()));
         model.addAttribute("roles", userDetails.getAuthorities());
 
         return "users/show";
-    }
-
-    private static UserDetailsImpl getUserDetailsFromPrincipal() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-        return userDetails;
     }
 }
