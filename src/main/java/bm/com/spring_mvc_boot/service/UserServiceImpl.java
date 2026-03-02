@@ -33,12 +33,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findAll() {
+    public List<User> getAllUsers() {
         return userRepository.findAll();
     }
 
     @Override
-    public User findById(Long id) {
+    public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
     }
 
@@ -54,13 +54,13 @@ public class UserServiceImpl implements UserService {
         updatedUser.setId(id);
 
         if (updatedUser.getPassword().isEmpty()) {
-            updatedUser.setPassword(findById(id).getPassword());
+            updatedUser.setPassword(getUserById(id).getPassword());
         } else {
             updatedUser.setPassword(passwordEncoder.encode(updatedUser.getPassword()));
         }
 
         if (roleName == null) {
-            updatedUser.setRoles(findById(id).getRoles());
+            updatedUser.setRoles(getUserById(id).getRoles());
         } else {
             updatedUser.getRoles().clear();
             updatedUser.getRoles().add(roleService.getRoleByName(roleName));

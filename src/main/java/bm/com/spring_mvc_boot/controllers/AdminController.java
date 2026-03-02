@@ -5,8 +5,7 @@ import bm.com.spring_mvc_boot.security.UserDetailsImpl;
 import bm.com.spring_mvc_boot.service.RoleService;
 import bm.com.spring_mvc_boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,23 +24,15 @@ public class AdminController {
     }
 
     @GetMapping
-    public String getAdminPage(Model model) {
-        model.addAttribute("users", userService.findAll());
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
+    public String getAdminPage(@AuthenticationPrincipal UserDetailsImpl userDetails, Model model) {
+        model.addAttribute("users", userService.getAllUsers());
         model.addAttribute("admin", userDetails.getUser());
         model.addAttribute("roles", roleService.getAllRoles());
         return "admin/index";
     }
 
     @GetMapping("/new")
-    public String getPageCreateUser(@ModelAttribute User user, Model model) {
-
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
-
+    public String getPageCreateUser(@AuthenticationPrincipal UserDetailsImpl userDetails, @ModelAttribute User user, Model model) {
         model.addAttribute("admin", userDetails.getUser());
         model.addAttribute("roles", roleService.getAllRoles());
         return "admin/new";

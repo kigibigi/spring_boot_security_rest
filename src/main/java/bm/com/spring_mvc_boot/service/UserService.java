@@ -7,8 +7,8 @@ import java.util.List;
 
 public interface UserService {
     void saveUser(User user, String roleName);
-    List<User> findAll();
-    User findById(Long id);
+    List<User> getAllUsers();
+    User getUserById(Long id);
     void deleteUser(Long id);
     void updateUser(Long id, User user, String roleName);
 }
